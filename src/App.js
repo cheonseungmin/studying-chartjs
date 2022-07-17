@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -44,11 +44,21 @@ function App() {
     setData([
       ...data,
       {
-        x: (new Date()).toString().slice(16, 24),
+        x: String(new Date().getTime()),
         y: Math.floor(Math.random() * 100),
       },
     ]);
   };
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      addData();
+    }, 1000);
+
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, [addData]);
 
   return (
     <>
@@ -56,7 +66,7 @@ function App() {
         ref={chartRef}
         data={chartData}
         options={options}
-        width={500}
+        width={800}
         height={500}
       />
       <button
