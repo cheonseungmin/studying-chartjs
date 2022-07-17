@@ -1,4 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {
+  useState, useRef, useEffect, useCallback,
+} from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -51,14 +53,10 @@ function App() {
   };
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
+    window.setTimeout(() => {
       addData();
-    }, 1000);
-
-    return () => {
-      window.clearInterval(timer);
-    };
-  }, [addData]);
+    }, 2000);
+  }, [data]);
 
   return (
     <>
